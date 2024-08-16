@@ -1,0 +1,80 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "ubc/api-image",
+  "version": "1.0.0",
+  "title": "Resource Image",
+  "category": "theme",
+  "description": "Display resource's image.",
+  "ancestor": [
+    "ubc/null"
+  ],
+  "attributes": {
+    "imageSource": {
+      "type": "string",
+      "default": ""
+    },
+    "isLink": {
+      "type": "boolean",
+      "default": false
+    },
+    "width": {
+      "type": "string"
+    },
+    "height": {
+      "type": "string"
+    },
+    "scale": {
+      "type": "string",
+      "default": "cover"
+    }
+  },
+  "usesContext": [
+    "images",
+    "link"
+  ],
+  "supports": {
+    "html": false,
+    "align": [
+      "left",
+      "center",
+      "right",
+      "wide",
+      "full"
+    ],
+    "color": {
+      "text": false,
+      "background": false
+    },
+    "filter": {
+      "duotone": true
+    },
+    "spacing": {
+      "margin": true,
+      "padding": true
+    },
+    "__experimentalBorder": {
+      "color": true,
+      "radius": true,
+      "width": true,
+      "__experimentalSkipSerialization": true,
+      "__experimentalDefaultControls": {
+        "color": true,
+        "radius": true,
+        "width": true
+      }
+    },
+    "shadow": {
+      "__experimentalSkipSerialization": true
+    },
+    "interactivity": {
+      "clientNavigation": true
+    }
+  },
+  "example": {},
+  "textdomain": "ubc-wp-api-inner-blocks",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "render": "file:./render.php"
+}

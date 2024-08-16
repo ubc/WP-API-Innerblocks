@@ -1,0 +1,23 @@
+/*!***********************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./blocks/src/resource-pagination copy/style.scss ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************/
+/**
+ * The following styles get applied both on the front of your site
+ * and in the editor.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+.ubc-api__pagination {
+  list-style: none;
+  display: flex;
+  padding: 0;
+}
+.ubc-api__pagination li {
+  margin-right: 4px;
+}
+.ubc-api__pagination .ubc-api__pagination__buttons {
+  color: #727171;
+  text-decoration: underline;
+}
+
+/*# sourceMappingURL=style-index.css.map*/

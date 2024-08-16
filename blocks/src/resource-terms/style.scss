@@ -1,0 +1,26 @@
+/**
+ * The following styles get applied both on the front of your site
+ * and in the editor.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+
+ .wp-block-ubc-api-terms {
+    gap: 5px;
+
+    &.is-style-boxed{
+        display: flex;
+        gap: 10px;
+
+        span {
+            display: none;
+        }
+
+        a {
+            padding: 5px 10px;
+            background: rgb(240,240,240);
+            text-decoration: none;;
+        }
+    }
+    
+ }

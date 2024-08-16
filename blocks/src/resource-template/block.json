@@ -1,0 +1,57 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "ubc/api-template",
+	"version": "1.0.0",
+	"title": "Resource Template",
+	"category": "theme",
+	"parent": [ "ubc/null" ],
+	"icon": "layout",
+	"description": "implements the layout of each resource within the template.",
+	"supports": {
+		"reusable": false,
+		"html": false,
+		"align": [ "wide", "full" ],
+		"layout": true,
+		"color": {
+			"gradients": true,
+			"link": true,
+			"__experimentalDefaultControls": {
+				"background": true,
+				"text": true
+			}
+		},
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true,
+			"__experimentalFontFamily": true,
+			"__experimentalFontWeight": true,
+			"__experimentalFontStyle": true,
+			"__experimentalTextTransform": true,
+			"__experimentalTextDecoration": true,
+			"__experimentalLetterSpacing": true,
+			"__experimentalDefaultControls": {
+				"fontSize": true
+			}
+		},
+		"spacing": {
+			"blockGap": {
+				"__experimentalDefault": "1.25em"
+			},
+			"__experimentalDefaultControls": {
+				"blockGap": true
+			}
+		},
+		"interactivity": true
+	},
+	"attributes": {},
+	"usesContext": [
+		"resources"
+	],
+	"example": {},
+	"textdomain": "ubc-wp-api-inner-blocks",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"render": "file:./render.php"
+}

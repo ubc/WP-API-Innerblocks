@@ -1,0 +1,17 @@
+/**
+ * The following styles get applied inside the editor only.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+
+ .wp-block-ubc-api-image::before {
+    background: currentColor;
+    bottom: 0;
+    content: "";
+    left: 0;
+    opacity: .1;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+ }

@@ -1,0 +1,20 @@
+{
+	"name": "ubc-wp-api-inner-blocks",
+	"version": "0.1.0",
+	"description": "Provide inner blocks that consumes data from external API.",
+	"author": "Kelvin Xu",
+	"license": "GPL-2.0-or-later",
+	"main": "blocks/build/index.js",
+	"scripts": {
+		"start": "wp-scripts start --webpack-src-dir=blocks/src/ --output-path=blocks/build/ --experimental-modules",
+		"build": "wp-scripts build --webpack-src-dir=blocks/src/ --output-path=blocks/build/ --experimental-modules"
+	},
+	"devDependencies": {
+		"@wordpress/scripts": "^27.6.0"
+	},
+	"dependencies": {
+		"@wordpress/icons": "^10.1.0",
+		"classnames": "^2.3.2",
+		"clsx": "^2.1.1"
+	}
+}
