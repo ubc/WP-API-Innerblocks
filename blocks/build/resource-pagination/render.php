@@ -27,10 +27,6 @@ $pagination_links = paginate_links(
 	)
 );
 
-if ( null === $pagination_links ) {
-	return;
-}
-
 $p = new \WP_HTML_Tag_Processor( $pagination_links );
 $p->set_bookmark( 'start' );
 
