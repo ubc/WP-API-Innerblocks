@@ -1,6 +1,6 @@
 {
 	"name": "ubc-wp-api-inner-blocks",
-	"version": "0.1.0",
+	"version": "1.0.2",
 	"description": "Provide inner blocks that consumes data from external API.",
 	"author": "Kelvin Xu",
 	"license": "GPL-2.0-or-later",
