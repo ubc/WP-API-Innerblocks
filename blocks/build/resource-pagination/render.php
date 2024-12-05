@@ -32,18 +32,19 @@ if ( null === $pagination_links ) {
 }
 
 $p = new \WP_HTML_Tag_Processor( $pagination_links );
-$p->set_bookmark( 'start' );
 
-while ( $p->next_tag(
+if ( $p->next_tag(
 	array(
 		'class_name' => 'page-numbers',
 		'tag_name'   => 'ul',
 	)
 ) ) {
 	$p->add_class( 'ubc-api__pagination' );
+} else {
+	return;
 }
 
-$p->seek( 'start' ); // To search tags from the beginning.
+$p->set_bookmark( 'start' );
 
 while ( $p->next_tag(
 	array(
