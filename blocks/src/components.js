@@ -11,12 +11,12 @@ const BlockNotSupportMessage = ( props ) => {
 
 const getDateFromGmt = ( gmtTimeString, format ) => {
     const { timezone } = getDateSettings();
-    
+
     // Parse the GMT time string using Moment.js
     var momentGmt = moment.utc( gmtTimeString );
 
-    // Convert to the desired timezone
-    var momentLocal = momentGmt.tz( timezone.string );
+    // Convert the GMT time to the desired timezone based on offset
+    var momentLocal = momentGmt.utcOffset( parseInt( timezone.offset ) );
 
     // Format the local time as per the format string
     var formattedTime = momentLocal.format( toMomentFormat( format ) );
