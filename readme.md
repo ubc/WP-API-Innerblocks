@@ -8,7 +8,7 @@ License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
 
 ## Description
-Provide inner blocks that consumes data from external API. The inner blocks receives context from the main block(eg, CTLT Events Block), and render contents accordingly.
+Provide inner blocks that consumes data from external API. The inner blocks receives context from the main block(eg, UBC Course Section Block), and render contents accordingly.
 
 ## Context Structure
 
