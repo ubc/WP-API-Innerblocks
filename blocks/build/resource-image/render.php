@@ -7,13 +7,18 @@
 
 namespace UBC\CTLT\Block\APIInnerBlocks;
 
-if ( ! isset( $block->context['images'] ) || ! isset( $attributes['imageSource'] ) ) {
+if ( ! isset( $block->context[ $block->name ] ) ) {
+	return;
+}
+
+$block_context = $block->context[ $block->name ];
+
+if ( ! isset( $block_context['images'] ) || ! isset( $attributes['imageSource'] ) ) {
 	return '';
 }
 
-$images     = $block->context['images'];
+$images     = $block_context['images'];
 $image_type = $attributes['imageSource'];
-$url        = isset( $block->context['link'] ) ? $block->context['link'] : '';
 
 if ( ! is_array( $images ) || empty( $images ) ) {
 	return '';
@@ -92,8 +97,8 @@ $output = sprintf(
 	safecss_filter_attr( implode( ' ', $styles ) )
 );
 
-if ( isset( $attributes['isLink'] ) && $attributes['isLink'] && $url ) {
-	$output = sprintf( '<a href="%1s" target="_blank" %2$s>%3$s</a>', $url ? esc_url( $url ) : '', $height, $output );
+if ( isset( $attributes['isLink'] ) && $attributes['isLink'] && isset( $image['link'] ) ) {
+	$output = sprintf( '<a href="%1s" target="_blank" %2$s>%3$s</a>', esc_url( $image['link'] ), $height, $output );
 }
 
 echo wp_kses_post( $output );

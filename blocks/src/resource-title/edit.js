@@ -16,18 +16,19 @@ import clsx from 'clsx';
 
 import './editor.scss';
 
-export default function Edit( { attributes: { level, textAlign, isLink, rel, linkTarget }, setAttributes, context } ) {
+export default function Edit( { name, attributes: { level, textAlign, isLink, rel, linkTarget }, setAttributes, context } ) {
 	const blockProps = useBlockProps( {
 		className: clsx( {
 			[ `has-text-align-${ textAlign }` ]: textAlign,
 		} ),
 	} );
 
-	const name = context.name ? context.name : '';
+	const blockContext = context[ name ];
+	const { title = '', link } = blockContext;
 
 	const renderTitle = () => {
 		const TagName = level === 0 ? 'p' : `h${ level }`;
-		return isLink ? <a href="#"><TagName { ...blockProps }>{ unescape( name ) }</TagName></a> : <TagName { ...blockProps }>{ unescape( name ) }</TagName>
+		return isLink && link ? <a href="#"><TagName { ...blockProps }>{ unescape( title ) }</TagName></a> : <TagName { ...blockProps }>{ unescape( title ) }</TagName>
 	}
 
 	return (
@@ -49,15 +50,15 @@ export default function Edit( { attributes: { level, textAlign, isLink, rel, lin
 			</BlockControls>
 			<InspectorControls>
 				<PanelBody title={ __( 'Settings' ) }>
-					<ToggleControl
+					{ link ? <ToggleControl
 						__nextHasNoMarginBottom
 						label={ __( 'Make title a link' ) }
 						onChange={ () =>
 							setAttributes( { isLink: ! isLink } )
 						}
 						checked={ isLink }
-					/>
-					{ isLink && (
+					/> : null }
+					{ isLink && link ? (
 						<>
 							<ToggleControl
 								__nextHasNoMarginBottom
@@ -80,7 +81,7 @@ export default function Edit( { attributes: { level, textAlign, isLink, rel, lin
 								}
 							/>
 						</>
-					) }
+					) : null }
 				</PanelBody>
 			</InspectorControls>
 		</>

@@ -10,30 +10,31 @@ import { BlockNotSupportMessage } from '../components';
 import { unescape } from 'lodash';
 import './editor.scss';
 
-export default function Edit( { attributes: { separator, taxonomy }, setAttributes, context } ) {
+export default function Edit( { attributes: { separator, taxonomy }, setAttributes, context, name } ) {
+	const blockContext = context[ name ];
 
-	if ( ! context.terms ) {
+	if ( ! blockContext.terms ) {
 		return <BlockNotSupportMessage>
 			Block not supported, missing context "terms".
 		</BlockNotSupportMessage>;
 	}
 
-	if ( context.terms.length === 0 ) {
+	if ( blockContext.terms.length === 0 ) {
 		return '';
 	}
 
 	if ( ! taxonomy || taxonomy === '' ) {
-		setAttributes( { taxonomy: context.terms[0].taxonomy } );
+		setAttributes( { taxonomy: blockContext.terms[0].taxonomy } );
 	}
 
 	const blockProps = useBlockProps();
 
-	const options = context.terms.map( ( term ) => {
+	const options = blockContext.terms.map( ( term ) => {
 		return { label: term.taxonomy, value: term.taxonomy };
 	} );
 
 	const renderTerms = () => {
-		let terms = context.terms.filter( ( group ) => {
+		let terms = blockContext.terms.filter( ( group ) => {
 			return group.taxonomy === taxonomy;
 		})
 
@@ -43,7 +44,10 @@ export default function Edit( { attributes: { separator, taxonomy }, setAttribut
 
 		terms = terms[0];
 		const termsHTML = terms.terms.map( ( term ) => {
-			return `<a href="#">${ unescape( term.name ) }</a>`;
+			if ( ! term.link ) {
+				return `<span>${ unescape( term.name ) }</span>`;
+			}
+			return `<a href="${ term.link }">${ unescape( term.name ) }</a>`;
 		}).join( '<span>' + separator + '</span>' );
 
 		return <div { ...blockProps }><RawHTML>{ termsHTML }</RawHTML></div>;

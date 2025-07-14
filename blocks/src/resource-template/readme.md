@@ -29,23 +29,3 @@ resources => array(
 	)
 )
 ```
-### JavaScript
-```javascript
-resources: [
-	{
-		name:
-		description:
-		...
-	},
-	{
-		name:
-		description:
-		...
-	},
-	{
-		name:
-		description:
-		...
-	}
-]
-```

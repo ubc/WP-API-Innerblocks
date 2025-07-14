@@ -7,12 +7,18 @@
 
 namespace UBC\CTLT\Block\APIInnerBlocks;
 
-if ( ! isset( $block->context['excerpt'] ) ) {
+if ( ! isset( $block->context[ $block->name ] ) ) {
+	return;
+}
+
+$block_context = $block->context[ $block->name ];
+
+if ( ! isset( $block_context['excerpt'] ) ) {
 	return '';
 }
 
-$excerpt = wp_specialchars_decode( $block->context['excerpt'] );
-$url     = isset( $block->context['link'] ) ? $block->context['link'] : '';
+$excerpt = wp_specialchars_decode( $block_context['excerpt'] );
+$url     = isset( $block_context['link'] ) ? $block_context['link'] : '';
 
 /*
 * The purpose of the excerpt length setting is to limit the length of both
@@ -20,7 +26,7 @@ $url     = isset( $block->context['link'] ) ? $block->context['link'] : '';
 * Because the excerpt_length filter only applies to auto generated excerpts,
 * wp_trim_words is used instead.
 */
-$more_text = ! empty( $attributes['moreText'] ) ? '<a class="wp-block-post-excerpt__more-link" href="' . esc_url( $url ) . '" target="_blank">' . wp_kses_post( $attributes['moreText'] ) . '</a>' : '';
+$more_text = ! empty( $attributes['moreText'] ) && isset( $url ) && ! empty( $url ) ? '<a class="wp-block-post-excerpt__more-link" href="' . esc_url( $url ) . '" target="_blank">' . wp_kses_post( $attributes['moreText'] ) . '</a>' : '';
 
 $excerpt_length = $attributes['excerptLength'];
 if ( isset( $excerpt_length ) ) {

@@ -18,15 +18,30 @@ import clsx from 'clsx';
 
 import './editor.scss';
 
-export default function Edit( { attributes: { dateType, textAlign, format, isLink }, setAttributes, context } ) {
+export default function Edit( { attributes: { dateType, textAlign, format, isLink }, setAttributes, context, name } ) {
+	const blockContext = context[ name ];
 
-	if ( ! context.datetimes || context.datetimes.length === 0 ) {
+		const blockProps = useBlockProps( {
+		className: clsx( {
+			[ `has-text-align-${ textAlign }` ]: textAlign
+		} ),
+	} );
+
+	const dateSettings = getDateSettings();
+
+	const [ siteFormat = dateSettings.formats.date ] = useEntityProp(
+		'root',
+		'site',
+		'date_format'
+	);
+
+	if ( ! blockContext.datetimes || blockContext.datetimes.length === 0 ) {
 		return <BlockNotSupportMessage>
 			Block not supported, missing context "datetimes".
 		</BlockNotSupportMessage>;
 	}
 
-	const { datetimes } = context;
+	const { datetimes } = blockContext;
 
 	if ( ! dateType || dateType === '' ) {
 		setAttributes( { dateType: datetimes[0].label } );
@@ -43,41 +58,25 @@ export default function Edit( { attributes: { dateType, textAlign, format, isLin
 		</BlockNotSupportMessage>;
 	}
 
-	datetime = datetime[0].value;
+	datetime = datetime[0];
 	//
 
-	const blockProps = useBlockProps( {
-		className: clsx( {
-			[ `has-text-align-${ textAlign }` ]: textAlign
-		} ),
-	} );
-
-	const dateSettings = getDateSettings();
-
-	const [ siteFormat = dateSettings.formats.date ] = useEntityProp(
-		'root',
-		'site',
-		'date_format'
-	);
-
 	let postDate = (
-		<time dateTime={ getDateFromGmt( datetime, format ? format : siteFormat ) }>
-			{ getDateFromGmt( datetime, format ? format : siteFormat ) }
+		<time dateTime={ getDateFromGmt( datetime.value, format ? format : siteFormat ) }>
+			{ getDateFromGmt( datetime.value, format ? format : siteFormat ) }
 		</time>
 	);
 
-	if ( isLink && datetime ) {
+	if ( isLink && datetime.link ) {
 		postDate = (
 			<a
-				href="#post-date-pseudo-link"
+				href="#"
 				onClick={ ( event ) => event.preventDefault() }
 			>
 				{ postDate }
 			</a>
 		);
 	}
-
-
 
 	return (
 		<>
@@ -95,7 +94,7 @@ export default function Edit( { attributes: { dateType, textAlign, format, isLin
 					<SelectControl
 						label="Date Type"
 						value={ dateType }
-						options={ context.datetimes.map( ( dt ) => {
+						options={ blockContext.datetimes.map( ( dt ) => {
 							return { label: dt.label, value: dt.label };
 						} ) }
 						onChange={ ( newDateType ) => {
@@ -110,12 +109,12 @@ export default function Edit( { attributes: { dateType, textAlign, format, isLin
 							setAttributes( { format: nextFormat } )
 						}
 					/>
-					<ToggleControl
+					{ datetime.link ? <ToggleControl
 						__nextHasNoMarginBottom
 						label={ __( 'Link to resource' ) }
 						onChange={ () => setAttributes( { isLink: ! isLink } ) }
 						checked={ isLink }
-					/>
+					/> : null }
 				</PanelBody>
 			</InspectorControls>
 

@@ -9,10 +9,8 @@
 ### PHP
 
 ```php
-'description' => 'description of the resource'
+array(
+    'description' => 'resource description',
+)
 ```
 
-### JavaScript
-```javascript
-description: 'description of the resource'
-```

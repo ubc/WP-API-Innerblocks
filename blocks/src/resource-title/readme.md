@@ -7,12 +7,8 @@
 
 ### PHP
 ```php
-'name' => 'title of the resource',
-'link'    => 'https://test.com' // Optional
-```
-
-### JavaScript
-```javascript
-name: 'title of the resource',,
-link: 'https://test.com' // Optional
+array(
+    'name' => 'title of the resource',
+    'link' => 'https://test.com' // Optional
+)
 ```

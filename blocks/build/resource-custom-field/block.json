@@ -49,10 +49,7 @@
       "clientNavigation": true
     }
   },
-  "usesContext": [
-    "custom",
-    "link"
-  ],
+  "usesContext": [],
   "attributes": {
     "selectedCFLabel": {
       "type": "string",

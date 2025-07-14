@@ -1,7 +1,6 @@
 /**
  * External dependencies
  */
-import { Placeholder } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { ToggleControl, PanelBody, SelectControl } from '@wordpress/components';
 import {
@@ -17,15 +16,10 @@ import DimensionControls from './dimension-controls';
 
 import './editor.scss';
 
-export default function Edit( { clientId, attributes, setAttributes, context } ) {
+export default function Edit( { clientId, attributes, setAttributes, context, name } ) {
+	const blockContext = context[ name ];
 
-	if ( ! context.images || context.images.length === 0 ) {
-		return <BlockNotSupportMessage>
-			Block not supported, missing context "images".
-		</BlockNotSupportMessage>;
-	}
-
-	const { images } = context;
+	const { images } = blockContext;
 
 	const {
 		imageSource,
@@ -34,6 +28,20 @@ export default function Edit( { clientId, attributes, setAttributes, context } )
 		width,
 		scale
 	} = attributes;
+
+	const borderProps = useBorderProps( attributes );
+	const shadowProps = getShadowClassesAndStyles( attributes );
+	
+	const blockProps = useBlockProps( {
+		style: { width, height },
+	} );
+	const blockEditingMode = useBlockEditingMode();
+
+	if ( ! blockContext.images || blockContext.images.length === 0 ) {
+		return <BlockNotSupportMessage>
+			Block not supported, missing context "images".
+		</BlockNotSupportMessage>;
+	}
 
 	if ( ! imageSource || imageSource === '' ) {
 		setAttributes( { imageSource: images[0].label } );
@@ -52,14 +60,6 @@ export default function Edit( { clientId, attributes, setAttributes, context } )
 
 	image = image[0];
 	//
-
-	const borderProps = useBorderProps( attributes );
-	const shadowProps = getShadowClassesAndStyles( attributes );
-	
-	const blockProps = useBlockProps( {
-		style: { width, height },
-	} );
-	const blockEditingMode = useBlockEditingMode();
 
 	const imageStyles = {
 		...borderProps.style,
@@ -84,7 +84,7 @@ export default function Edit( { clientId, attributes, setAttributes, context } )
 					<SelectControl
 						label="Image Source"
 						value={ imageSource }
-						options={ context.images.map( ( img ) => {
+						options={ images.map( ( img ) => {
 							return { label: img.label, value: img.label };
 						} ) }
 						onChange={ ( newImageSource ) => {
@@ -92,12 +92,12 @@ export default function Edit( { clientId, attributes, setAttributes, context } )
 						} }
 						__nextHasNoMarginBottom
 					/>
-					<ToggleControl
+					{ image.link && <ToggleControl
 						__nextHasNoMarginBottom
 						label={ __( 'Link to resource' ) }
 						onChange={ () => setAttributes( { isLink: ! isLink } ) }
 						checked={ isLink }
-					/>
+					/> }
 				</PanelBody>
 			</InspectorControls>
 		</>
@@ -113,8 +113,8 @@ export default function Edit( { clientId, attributes, setAttributes, context } )
 						style={ imageStyles }
 					/>
 				) : (
-					<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60" preserveAspectRatio="none" class="components-placeholder__illustration" aria-hidden="true" focusable="false">
-						<path vector-effect="non-scaling-stroke" d="M60 60 0 0"></path>
+					<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60" preserveAspectRatio="none" className="components-placeholder__illustration" aria-hidden="true" focusable="false">
+						<path vectorEffect="non-scaling-stroke" d="M60 60 0 0"></path>
 					</svg>
 				) }
 			</figure>

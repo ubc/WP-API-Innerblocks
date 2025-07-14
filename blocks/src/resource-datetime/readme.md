@@ -9,30 +9,18 @@
 
 ### PHP
 ```php
-'datetimes' => array(
-	array(
-		'label' => 'datetime_1_label',
-		'value' => '2024-07-02T08:37:48',
+array(
+	'datetimes' => array(
+		array(
+			'label' => 'datetime_1_label',
+			'value' => '2024-07-02T08:37:48',
+			'link'  => 'https://test.com' // Optional
+		),
+		array(
+			'label' => 'datetime_2_label',
+			'value' => '2024-06-02T08:37:48',
+			'link'  => 'https://test.com' // Optional
+		)
 	),
-	array(
-		'label' => 'datetime_2_label',
-		'value' => '2024-06-02T08:37:48',
-	)
-),
-'link'      => 'https://test.com' // Optional
-```
-
-### JavaScript
-```javascript
-datetimes: [
-	 {
-		 label: 'datetime_1_label',
-		 value: '2024-07-02T08:37:48'
-	 },
-	 {
-		 label: 'datetime_2_label',
-		 value: '2024-06-02T08:37:48'
-	 }
- ],
- link: 'https://test.com' // Optional
+)
 ```

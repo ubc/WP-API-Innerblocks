@@ -25,10 +25,7 @@
       "default": false
     }
   },
-  "usesContext": [
-    "datetimes",
-    "link"
-  ],
+  "usesContext": [],
   "supports": {
     "html": false,
     "color": {

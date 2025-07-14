@@ -7,12 +7,8 @@
 
 ### PHP
 ```php
-'excerpt' => 'excerpt from resource',
-'link'       => 'https://test.com' // Optional
-```
-
-### JavaScript
-```javascript
-excerpt: 'excerpt from resource',,
- link: 'https://test.com' // Optional
+array(
+    'excerpt' => 'excerpt from resource',
+    'link'    => 'https://test.com' // Optional
+)
 ```

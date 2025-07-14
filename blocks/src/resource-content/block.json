@@ -51,7 +51,7 @@
 			}
 		}
 	},
-	"usesContext": [ "description" ],
+	"usesContext": [],
 	"example": {},
 	"textdomain": "ubc-wp-api-inner-blocks",
 	"editorScript": "file:./index.js",

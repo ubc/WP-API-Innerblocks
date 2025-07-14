@@ -7,11 +7,17 @@
 
 namespace UBC\CTLT\Block\APIInnerBlocks;
 
-if ( ! isset( $block->context['terms'] ) ) {
+if ( ! isset( $block->context[ $block->name ] ) ) {
+	return;
+}
+
+$block_context = $block->context[ $block->name ];
+
+if ( ! isset( $block_context['terms'] ) ) {
 	return '';
 }
 
-$terms = $block->context['terms'];
+$terms = $block_context['terms'];
 
 if ( ! is_array( $terms ) || empty( $terms ) ) {
 	return '';
@@ -35,6 +41,9 @@ $terms_by_taxonomy = array_values( $terms_by_taxonomy )[0];
 // Generate HTML for terms.
 $terms_html = array_map(
 	function ( $term ) {
+		if ( ! isset( $term['link'] ) ) {
+			return '<span>' . wp_specialchars_decode( $term['name'] ) . '</span>';
+		}
 		return '<a href="' . esc_url( $term['link'] ) . '" target="_blank">' . wp_specialchars_decode( $term['name'] ) . '</a>';
 	},
 	$terms_by_taxonomy['terms']

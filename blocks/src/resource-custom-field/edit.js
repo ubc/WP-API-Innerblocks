@@ -17,20 +17,22 @@ import { unescape } from 'lodash';
 
 import './editor.scss';
 
-export default function Edit( { attributes: { textAlign, isLink, selectedCFLabel }, setAttributes, context } ) {
+export default function Edit( { attributes: { textAlign, isLink, selectedCFLabel }, setAttributes, context, name } ) {
 	const blockProps = useBlockProps( {
 		className: clsx( {
 			[ `has-text-align-${ textAlign }` ]: textAlign,
 		} ),
 	} );
 
-	if ( ! context.custom ) {
+	const blockContext = context[ name ];
+
+	if ( ! blockContext.custom ) {
 		return <BlockNotSupportMessage>
 			Block not supported, missing context "custom".
 		</BlockNotSupportMessage>;
 	}
 
-	const { custom } = context;
+	const { custom } = blockContext;
 
 	if ( ! selectedCFLabel ||selectedCFLabel === '' ) {
 		setAttributes( { selectedCFLabel: custom[0].label } );
@@ -47,11 +49,11 @@ export default function Edit( { attributes: { textAlign, isLink, selectedCFLabel
 		</BlockNotSupportMessage>;
 	}
 
-	customField = customField[0].value;
+	customField = customField[0];
 	//
 
 	const renderCustomField = () => {
-		return isLink ? <a href="#"><p { ...blockProps }><RawHTML>{ unescape( customField.toString() ) }</RawHTML></p></a> : <p { ...blockProps }><RawHTML>{ unescape( customField.toString() ) }</RawHTML></p>
+		return isLink ? <a href="#"><p { ...blockProps }><RawHTML>{ unescape( customField.value.toString() ) }</RawHTML></p></a> : <p { ...blockProps }><RawHTML>{ unescape( customField.value.toString() ) }</RawHTML></p>
 	}
 
 	return (
@@ -78,14 +80,14 @@ export default function Edit( { attributes: { textAlign, isLink, selectedCFLabel
 						} }
 						__nextHasNoMarginBottom
 					/>
-					<ToggleControl
+					{ customField.link ? <ToggleControl
 						__nextHasNoMarginBottom
 						label={ __( 'Make element a link' ) }
 						onChange={ () =>
 							setAttributes( { isLink: ! isLink } )
 						}
 						checked={ isLink }
-					/>
+					/> : null }
 				</PanelBody>
 			</InspectorControls>
 		</>

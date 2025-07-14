@@ -57,10 +57,7 @@
       "clientNavigation": true
     }
   },
-  "usesContext": [
-    "excerpt",
-    "link"
-  ],
+  "usesContext": [],
   "example": {},
   "textdomain": "ubc-wp-api-inner-blocks",
   "editorScript": "file:./index.js",

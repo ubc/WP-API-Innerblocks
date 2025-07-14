@@ -19,7 +19,7 @@ if ( ! is_array( $resources ) || empty( $resources ) ) {
 
 $wrapper_attributes = get_block_wrapper_attributes(
 	array(
-		'class' => 'wp-block-post-template',
+		'class' => 'wp-block-post-template ubc-api-template',
 	)
 );
 
@@ -33,13 +33,7 @@ foreach ( $resources as $key => $resource ) {
 	$block_instance['blockName'] = 'core/null';
 
 	$filter_block_context = static function ( $context, $parsed_block ) use ( $resource ) {
-
-		if ( ! str_starts_with( $parsed_block['blockName'], 'ubc/api' ) ) {
-			return $context;
-		}
-
 		$context = array_merge( $context, $resource );
-
 		return $context;
 	};
 

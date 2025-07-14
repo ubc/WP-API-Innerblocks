@@ -19,10 +19,11 @@ import './editor.scss';
 
 const ELLIPSIS = '…';
 
-export default function Edit( { attributes, setAttributes, context } ) {
+export default function Edit( { attributes, setAttributes, context, name } ) {
+	const blockContext = context[ name ];
 
 	const { textAlign, moreText, showMoreOnNewLine, excerptLength } = attributes;
-	const excerpt = context.excerpt ? context.excerpt : '';
+	const { excerpt = '', link } = blockContext;
 
 	const blockProps = useBlockProps( {
 		className: clsx(
@@ -136,7 +137,7 @@ export default function Edit( { attributes, setAttributes, context } ) {
 			</BlockControls>
 			<InspectorControls>
 				<PanelBody title={ __( 'Settings' ) }>
-					<ToggleControl
+					{ link ? <ToggleControl
 						__nextHasNoMarginBottom
 						label={ __( 'Show link on new line' ) }
 						checked={ showMoreOnNewLine }
@@ -145,7 +146,7 @@ export default function Edit( { attributes, setAttributes, context } ) {
 								showMoreOnNewLine: newShowMoreOnNewLine,
 							} )
 						}
-					/>
+					/> : null }
 					<RangeControl
 						label={ __( 'Max number of words' ) }
 						value={ excerptLength }

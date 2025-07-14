@@ -8,30 +8,18 @@
 
 ### PHP
 ```php
-'custom' => array(
-	array(
-		'label' => 'cf_1_label',
-		'value' => 'cf_1_value',
-	),
-	array(
-		'label' => 'cf_2_label',
-		'value' => 'cf_2_value',
+array(
+	'custom' => array(
+		array(
+			'label' => 'cf_1_label',
+			'value' => 'cf_1_value',
+			'link'  => 'cf_1_link' //Optional
+		),
+		array(
+			'label' => 'cf_2_label',
+			'value' => 'cf_2_value',
+			'link'  => 'cf_2_link' //Optional
+		)
 	)
-),
-'link'      => 'https://test.com' // Optional
-```
-
-### JavaScript
-```javascript
-custom: [
-	 {
-		 label: 'cf_1_label',
-		 value: 'cf_1_value',
-	 },
-	 {
-		 label: 'cf_2_label',
-		 value: 'cf_2_value'
-	 }
- ],
- link: 'https://test.com' // Optional
+)
 ```

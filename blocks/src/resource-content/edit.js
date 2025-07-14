@@ -11,9 +11,9 @@ import { unescape } from 'lodash';
 
 import './editor.scss';
 
-export default function Edit( { context } ) {
-
-	const description = context.description ? context.description : '';
+export default function Edit( { name, context } ) {
+	const blockContext = context[ name ];
+	const description = blockContext.description ? blockContext.description : '';
 
 	const renderDescription = () => {
 		return <div { ...useBlockProps() }><RawHTML>{ unescape( description ) }</RawHTML></div>

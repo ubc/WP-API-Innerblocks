@@ -7,12 +7,17 @@
 
 namespace UBC\CTLT\Block\APIInnerBlocks;
 
-if ( ! isset( $block->context['custom'] ) || ! isset( $attributes['selectedCFLabel'] ) ) {
+if ( ! isset( $block->context[ $block->name ] ) ) {
+	return;
+}
+
+$block_context = $block->context[ $block->name ];
+
+if ( ! isset( $block_context['custom'] ) || ! isset( $attributes['selectedCFLabel'] ) ) {
 	return '';
 }
 
-$custom_fields     = $block->context['custom'];
-$url               = isset( $block->context['link'] ) ? $block->context['link'] : '';
+$custom_fields     = $block_context['custom'];
 $selected_cf_label = $attributes['selectedCFLabel'];
 
 if ( ! is_array( $custom_fields ) || empty( $custom_fields ) ) {
@@ -31,13 +36,13 @@ if ( empty( $custom_field ) ) {
 	return '';
 }
 
-$custom_field = array_shift( $custom_field )['value'];
+$custom_field = array_shift( $custom_field );
 // end Get datetime string based on currently selected dateType.
 
-if ( isset( $attributes['isLink'] ) && $attributes['isLink'] ) {
-	$content = sprintf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url( $url ), wp_kses_post( wp_specialchars_decode( $custom_field ) ) );
+if ( isset( $attributes['isLink'] ) && $attributes['isLink'] && isset( $custom_field['link'] ) && ! empty( $custom_field['link'] ) ) {
+	$content = sprintf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url( $custom_field['link'] ), wp_kses_post( wp_specialchars_decode( $custom_field['value'] ) ) );
 } else {
-	$content = wp_kses_post( $custom_field );
+	$content = wp_kses_post( $custom_field['value'] );
 }
 
 $classes = array();

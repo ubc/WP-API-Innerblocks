@@ -19,10 +19,7 @@ import clsx from 'clsx';
 
 import './editor.scss';
 
-const DEFAULT_TEMPLATE = [
-	[ 'ubc/api-title' ],
-	[ 'ubc/api-excerpt' ]
-];
+const DEFAULT_TEMPLATE = [];
 
 function ResourceTemplateBlockPreview( attrs ) {
 	const {
@@ -71,7 +68,7 @@ export default function Edit( { attributes: { layout }, setAttributes, context, 
 		className: clsx( __unstableLayoutClassNames, {
 			[ `columns-${ columnCount }` ]:
 				layoutType === 'grid' && columnCount, // Ensure column count is flagged via classname for backwards compatibility.
-		} ),
+		}, 'ubc-api-template' ),
 	} );
 
 	const [ activeResourceId, setActiveResourceId ] = useState();
@@ -121,6 +118,7 @@ export default function Edit( { attributes: { layout }, setAttributes, context, 
 					resources.map( ( resource, index ) => (
 						<BlockContextProvider
 							value={ resource }
+							key={ index }
 						>
 							{ index === ( activeResourceId || 0 ) ? (
 							<ResourceTemplateInnerBlocks />

@@ -40,7 +40,7 @@
 			"clientNavigation": true
 		}
 	},
-	"usesContext": [ "name", "link" ],
+	"usesContext": [],
 	"attributes": {
 		"textAlign": {
 			"type": "string"

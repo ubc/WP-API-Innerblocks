@@ -59,9 +59,7 @@
       "default": ", "
     }
   },
-  "usesContext": [
-    "terms"
-  ],
+  "usesContext": [],
   "styles": [
     {
       "name": "default",

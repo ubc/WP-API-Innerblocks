@@ -7,23 +7,30 @@
 
 namespace UBC\CTLT\Block\APIInnerBlocks;
 
-if ( ! isset( $block->context['name'] ) ) {
+if ( ! isset( $block->context[ $block->name ] ) ) {
+	return;
+}
+
+$block_context = $block->context[ $block->name ];
+
+
+if ( ! isset( $block_context['title'] ) ) {
 	return '';
 }
 
-$name = wp_specialchars_decode( $block->context['name'] );
-$url  = isset( $block->context['link'] ) ? $block->context['link'] : '';
+$title = wp_specialchars_decode( $block_context['title'] );
+$url   = isset( $block_context['link'] ) ? $block_context['link'] : '';
 
 $tag_name = 'h2';
 if ( isset( $attributes['level'] ) ) {
 	$tag_name = 0 === $attributes['level'] ? 'p' : 'h' . (int) $attributes['level'];
 }
 
-if ( isset( $attributes['isLink'] ) && $attributes['isLink'] ) {
+if ( isset( $attributes['isLink'] ) && $attributes['isLink'] && ! empty( $url ) ) {
 	$rel           = ! empty( $attributes['rel'] ) ? 'rel="' . esc_attr( $attributes['rel'] ) . '"' : '';
-	$title_content = sprintf( '<a href="%1$s" target="%2$s" %3$s>%4$s</a>', esc_url( $url ), esc_attr( $attributes['linkTarget'] ), $rel, $name );
+	$title_content = sprintf( '<a href="%1$s" target="%2$s" %3$s>%4$s</a>', esc_url( $url ), esc_attr( $attributes['linkTarget'] ), $rel, $title );
 } else {
-	$title_content = $name;
+	$title_content = $title;
 }
 
 $classes = array();

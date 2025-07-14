@@ -7,11 +7,17 @@
 
 namespace UBC\CTLT\Block\APIInnerBlocks;
 
-if ( ! isset( $block->context['description'] ) ) {
-	return '';
+if ( ! isset( $block->context[ $block->name ] ) ) {
+	return;
 }
 
-$description = wp_specialchars_decode( $block->context['description'] );
+$block_context = $block->context[ $block->name ];
+
+if ( ! isset( $block_context['description'] ) ) {
+	return;
+}
+
+$description = wp_specialchars_decode( $block_context['description'] );
 
 $wrapper_attributes = get_block_wrapper_attributes();
 

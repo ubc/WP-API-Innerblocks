@@ -27,7 +27,7 @@
 			"default": "cover"
 		}
 	},
-	"usesContext": [ "images", "link" ],
+	"usesContext": [],
 	"supports": {
 		"html": false,
 		"align": [ "left", "center", "right", "wide", "full" ],
